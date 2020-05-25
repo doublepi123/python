@@ -17,10 +17,14 @@ def __main__():
     csv_reader=csv.reader(open('data.csv',encoding="GBK"))
     s = []
     flag = 1
+    daima = ''
+    jianchen = ''
     for i in csv_reader:
         if flag == 1:
             flag = 0
             continue
+        daima=i[0]
+        jianchen = i[1]
         temp = i[:3]
         temp.append(i[4])
         temp.append(i[7])
@@ -28,6 +32,10 @@ def __main__():
         if temp[5] == 'N/A':
             continue
         s.append(temp)
+    writer = csv.writer(open('1.csv','w', newline=''))
+    writer.writerow(["代码","简称","日期","开盘价(元)","收盘价(元)","成交金额(元)"])
+    for i in range(len(s)):
+        writer.writerow(s[i])
     #处理数据，筛出有效数据
     kaipan = 0
     shoupan = 0
@@ -53,10 +61,10 @@ def __main__():
         cnt = cnt+1
         last = mm
     #按照第二步要求处理数据
-    writer = csv.writer(open('save.csv','w', newline=''))
-    writer.writerow(["月份","开盘价","收盘价","成交额"])
+    writer = csv.writer(open('2.csv','w', newline=''))
+    writer.writerow(["代码","简称","月份","开盘价(元)","收盘价(元)","成交金额(元)"])
     for i in range(len(data)):
-        writer.writerow(year_month.findall(now.month)[0],data[i].kaipan,data[i].shoupan,data[i].jine])
+        writer.writerow([daima,jianchen,year_month.findall(data[i].month)[0],data[i].kaipan,data[i].shoupan,data[i].jine])
     #将数据输出至save.csv
     x = []
     y1 = []
