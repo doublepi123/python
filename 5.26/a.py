@@ -56,7 +56,7 @@ def __main__():
     writer = csv.writer(open('save.csv','w', newline=''))
     writer.writerow(["月份","开盘价","收盘价","成交额"])
     for i in range(len(data)):
-        writer.writerow([data[i].month,data[i].kaipan,data[i].shoupan,data[i].jine])
+        writer.writerow(year_month.findall(now.month)[0],data[i].kaipan,data[i].shoupan,data[i].jine])
     #将数据输出至save.csv
     x = []
     y1 = []
